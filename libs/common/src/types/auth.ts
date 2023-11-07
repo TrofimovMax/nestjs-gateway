@@ -42,12 +42,12 @@ export interface User {
 
 export interface SocialMedia {
   twitterUri?: string | undefined;
-  facebookUri?: string | undefined;
+  fbUri?: string | undefined;
 }
 
 export const AUTH_PACKAGE_NAME = "auth";
 
-export interface UserServiceClient {
+export interface UsersServiceClient {
   createUser(request: CreateUserDto): Observable<User>;
 
   findAllUsers(request: Empty): Observable<Users>;
@@ -61,7 +61,7 @@ export interface UserServiceClient {
   queryUsers(request: Observable<PaginationDto>): Observable<Users>;
 }
 
-export interface UserServiceController {
+export interface UsersServiceController {
   createUser(request: CreateUserDto): Promise<User> | Observable<User> | User;
 
   findAllUsers(request: Empty): Promise<Users> | Observable<Users> | Users;
@@ -75,19 +75,19 @@ export interface UserServiceController {
   queryUsers(request: Observable<PaginationDto>): Observable<Users>;
 }
 
-export function UserServiceControllerMethods() {
+export function UsersServiceControllerMethods() {
   return function (constructor: Function) {
     const grpcMethods: string[] = ["createUser", "findAllUsers", "findOneUser", "updateUser", "removeUser"];
     for (const method of grpcMethods) {
       const descriptor: any = Reflect.getOwnPropertyDescriptor(constructor.prototype, method);
-      GrpcMethod("UserService", method)(constructor.prototype[method], method, descriptor);
+      GrpcMethod("UsersService", method)(constructor.prototype[method], method, descriptor);
     }
     const grpcStreamMethods: string[] = ["queryUsers"];
     for (const method of grpcStreamMethods) {
       const descriptor: any = Reflect.getOwnPropertyDescriptor(constructor.prototype, method);
-      GrpcStreamMethod("UserService", method)(constructor.prototype[method], method, descriptor);
+      GrpcStreamMethod("UsersService", method)(constructor.prototype[method], method, descriptor);
     }
   };
 }
 
-export const USER_SERVICE_NAME = "UserService";
+export const USERS_SERVICE_NAME = "UsersService";

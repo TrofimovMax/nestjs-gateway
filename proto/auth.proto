@@ -42,7 +42,7 @@ message User {
   string username = 2;
   string password = 3;
   int32 age = 4;
-  bool subscribe = 5;
+  bool subscribed = 5;
   SocialMedia socialMedia = 6;
 }
 

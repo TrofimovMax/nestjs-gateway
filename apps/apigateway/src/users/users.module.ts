@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { UsersController } from './users.controller';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { AUTH_SERVICE } from './constants';
 import { AUTH_PACKAGE_NAME } from '@app/common';
 import { join } from 'path';
+import { UsersResolver } from "./users.resolver";
 
 @Module({
   imports: [
@@ -19,7 +19,6 @@ import { join } from 'path';
       },
     ]),
   ],
-  controllers: [UsersController],
-  providers: [UsersService],
+  providers: [UsersService, UsersResolver],
 })
 export class UsersModule {}

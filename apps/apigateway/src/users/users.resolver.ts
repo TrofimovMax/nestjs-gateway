@@ -6,7 +6,6 @@ import { UpdateUserInput } from "./dto/input/update-user.input";
 import { RemoveUserInput } from "./dto/input/remove-user.input";
 import { Args, Mutation, Query, Resolver } from "@nestjs/graphql";
 import { map, Observable } from "rxjs";
-import { Users } from "./models/users";
 
 @Resolver(() => User)
 export class UsersResolver {
@@ -16,7 +15,6 @@ export class UsersResolver {
   getUser(@Args() getUserArgs: GetUserArgs): Observable<User> {
     return this.usersService.findOne(getUserArgs.id);
   }
-
   @Query(() => [User], { name: 'getUsers', nullable: 'items' })
   getUsers(): Observable<User[]> {
     return this.usersService.findAll().pipe(

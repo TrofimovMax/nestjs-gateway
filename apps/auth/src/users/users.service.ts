@@ -39,7 +39,6 @@ export class UsersService implements OnModuleInit {
   }
 
   update(id: string, updateUserDto: UpdateUserDto): User {
-    console.log(updateUserDto);
     const userIndex = this.users.findIndex((user) => user.id === id);
     if (userIndex !== -1) {
       this.users[userIndex] = {

@@ -8,7 +8,9 @@ import {
 } from '@app/common';
 import { AUTH_SERVICE } from './constants';
 import { ClientGrpc } from '@nestjs/microservices';
-import { EMPTY, ReplaySubject } from "rxjs";
+import { EMPTY, Observable, ReplaySubject } from "rxjs";
+import { User } from "./models/user";
+import { FindOneUserDto } from '@app/common';
 
 @Injectable()
 export class UsersService implements OnModuleInit {
@@ -29,8 +31,9 @@ export class UsersService implements OnModuleInit {
     return this.usersService.findAllUsers(EMPTY);
   }
 
-  findOne(id: string) {
-    return this.usersService.findOneUser({ id });
+  findOne(id: string): Observable<User | undefined> {
+    const request: FindOneUserDto = { id };
+    return this.usersService.findOneUser(request);
   }
 
   update(id: string, updateUserDto: UpdateUserDto) {

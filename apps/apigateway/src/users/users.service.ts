@@ -8,7 +8,7 @@ import {
 } from '@app/common';
 import { AUTH_SERVICE } from './constants';
 import { ClientGrpc } from '@nestjs/microservices';
-import { ReplaySubject } from 'rxjs';
+import { EMPTY, ReplaySubject } from "rxjs";
 
 @Injectable()
 export class UsersService implements OnModuleInit {
@@ -26,7 +26,7 @@ export class UsersService implements OnModuleInit {
   }
 
   findAll() {
-    return this.usersService.findAllUsers({});
+    return this.usersService.findAllUsers(EMPTY);
   }
 
   findOne(id: string) {
